@@ -1088,15 +1088,15 @@ impl DeploymentState {
 }
 
 #[derive(Debug, Deserialize, Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
-#[allow(non_camel_case_types)]
+#[serde(rename_all = "camelCase")]
 pub enum SubgraphFeature {
-    nonFatalErrors,
+    NonFatalErrors,
 }
 
 impl std::fmt::Display for SubgraphFeature {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            SubgraphFeature::nonFatalErrors => write!(f, "nonFatalErrors"),
+            SubgraphFeature::NonFatalErrors => write!(f, "nonFatalErrors"),
         }
     }
 }
@@ -1106,7 +1106,7 @@ impl FromStr for SubgraphFeature {
 
     fn from_str(s: &str) -> anyhow::Result<Self> {
         match s {
-            "nonFatalErrors" => Ok(SubgraphFeature::nonFatalErrors),
+            "nonFatalErrors" => Ok(SubgraphFeature::NonFatalErrors),
             _ => Err(anyhow::anyhow!("invalid subgraph feature {}", s)),
         }
     }
